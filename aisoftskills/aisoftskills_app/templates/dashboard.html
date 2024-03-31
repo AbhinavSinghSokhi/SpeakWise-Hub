@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <!-- font awesome link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- font family poppins link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+
+
+    <!-- custom style link -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/mainpagestyle.css' %}">
+
+</head>
+<body>
+    <header>
+        <div class="header-1">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-user-graduate"></i><span>Softskill</span>
+            </a>
+            <div class="navigation">
+                <a href="#" title="">feature</a>
+                <a href="#" title="">pricing</a>
+                <a href="#" title="">community</a>
+                <a href="#" title="">support</a>
+                <a href="#" title="">about</a>
+                <a href="#" title="">contact</a>
+            </div>
+            <div class="usr">
+                <a href="" title="log-in" id="loginButton" class="btn nav-link">{{user.username}}</a>
+                <a href="logout_user" title="log-in" id="loginButton" class="btn nav-link">Logout</a>
+            </div>
+            <div class="fas fa-user usricn"></div>
+            <div id="navigationbtn">
+                <span class="fas fa-times" id="closebtn"></span>
+                <span class="fa-solid fa-bars active" id="openbtn" ></span>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="speech-to-text-section">
+            <div class="reading-para-sec">
+                {{paragraph}}
+            </div>
+            <div class="user-input-text-sec">
+                <div>
+                    <button id="dashboard-btn">click to start</button>
+                </div>
+                <div class="dashboard">
+                    <form action="user_speech" method="post">
+                        {% csrf_token %}
+                        <div><!-- <h1 id="work" contenteditable="false"></h1> -->
+                        <textarea name="user's_speech" id="work" cols="60" rows="25" readonly></textarea>
+                        </div>
+                        <div>
+                            <button>Generate Result</button>
+                            {% if result %}
+                            <h2>{{ result }}</h2>
+                            {% endif %}
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div>
+        </div>
+        <a href="newspage">News</a>
+        <a href="server-side-fetch">django</a>
+    </section>
+
+
+
+
+
+<script>
+// document.getElementById('send-button').addEventListener('click', function() {
+//             var text = document.getElementById('work').innerText;
+//             sendTextToDjango(text);
+//         });
+const SpeechRecogniser = window.SpeechRecognition || window.webkitSpeechRecognition;
+const btn = document.querySelector("#dashboard-btn");
+const work = document.querySelector("#work");
+
+if(SpeechRecogniser){
+    const audioListener = new SpeechRecogniser();
+    audioListener.continuous = true;
+    btn?.addEventListener("click",(ev)=>{
+        btn.disabled = true;
+        audioListener.start();
+        audioListener.addEventListener("audiostart",()=>{
+            console.log("audio started");
+        });
+        audioListener.addEventListener("audioend",()=>{
+            console.log("audio ended");
+        });
+        audioListener.addEventListener("start",()=>{
+            console.log("listener  started");
+        });
+        audioListener.addEventListener("end",()=>{
+            console.log("listener closed");
+            audioListener.stop();
+            btn.disabled = false;
+        });
+        audioListener.addEventListener("nomatch",()=>{
+            console.log("voice stop but match nothings");
+        });
+        audioListener.addEventListener("result",(ev)=>{
+            const resultList = ev.results;
+            console.log(resultList[0]);
+            if(resultList){
+                work.innerHTML = resultList[resultList.length - 1][0].transcript;
+            }
+        });
+        audioListener.addEventListener("error",(ev)=>{
+            console.log(ev);
+        });
+    })
+}
+</script>
+
+
+</body>
+</html>

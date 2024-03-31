@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/mainpagestyle.css' %}">
+</head>
+<body>
+    <div>
+        <div class="news-section">
+            {% if news_data %}
+                {% for article in news_data.articles %}
+                    <div class="news-card">
+                        <h2>{{ article.title }}</h2>
+                        <p>{{ article.description }}</p>
+                        <a href="{{ article.url }}">Read more</a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <li>No news data available</li>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
