@@ -1,0 +1,58 @@
+<!-- key = fbc16b8a6f9f4eb9b425a04ae9ae8c24 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // date must be number ...
+        async function getNewsBefore(key,date){
+
+            // let apiDate = date || (new Date()).getDate();
+            let currentDate = new Date();
+            let apiDate = date || `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
+
+            // var url = `https://newsapi.org/v2/everything?q=Apple&from=2024-03-${apiDate}&apiKey=${key}`;
+            const res = await fetch(
+				`https://newsapi.org/v2/everything?q=apple&from=2024-03-29&to=2024-03-29&sortBy=popularity&apiKey=${key}`
+			)
+            const data = res.json();
+            if(data.totalResults){
+                data.articles.forEach(element => {
+                    console.log(element);
+                    const {source,author,title,description,url,urlToImage,publishedAt,content} = element;
+                    if(!(content === "[Removed]" && description === "[Removed]" && urlToImage === null && title === "[Removed]")){
+                        /* madatiory to have */
+                        // content define just brief
+                        // description define all about it
+                        // urltoimg contanis image url
+                        // title contains title
+                        console.log("If block reached")
+                        articleDiv.classList.add('article');
+
+                        const articleTitle = document.createElement('h2');
+                        articleTitle.textContent = title;
+
+                        const articleDescription = document.createElement('p');
+                        articleDescription.textContent = description;
+
+                        const articleLink = document.createElement('a');
+                        articleLink.href = url;
+                        articleLink.textContent = 'Read more';
+
+                        // Append elements to the container
+                        articleDiv.appendChild(articleTitle);
+                        articleDiv.appendChild(articleDescription);
+                        articleDiv.appendChild(articleLink);
+                        newsContainer.appendChild(articleDiv);
+                    }
+                });
+            }
+        }
+        getNewsBefore("6a547d9dbccb4bb8aea45988d4d98680",28)
+    </script>
+</body>
+</html>
