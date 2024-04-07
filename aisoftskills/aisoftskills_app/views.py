@@ -60,31 +60,6 @@ def dashboard_page(request):
     result= request.session.get("result", None)
     return render(request, "dashboard.html", {'paragraph': para.paragraph, 'username':request.user,'result': result})
 
-# def newspage(request):
-#     return render(request, "newspage.html")
-
-# def fetchnews(request):
-#     url = 'https://newsapi.org/v2/everything'
-#     params = {
-#         'q': 'apple',
-#         'from': '2024-03-29',
-#         'to': '2024-03-29',
-#         'sortBy': 'popularity',
-#         'apiKey': 'fbc16b8a6f9f4eb9b425a04ae9ae8c24'
-#     }
-#     response = requests.get(url, params=params)
-#     data = response.json()
-#     return JsonResponse(data)
-#     # request.session['news_data'] = data
-
-#     # return redirect(news)
-#     # return render(request, 'news.html',{'news':data})
-
-# def news(request):
-#     news_data = request.session.get('news_data')
-#     return render(request,'news.html', {'news_data':news_data})
-
-
 def user_speech(request):
     if request.method=="POST":
         SpeechPara= request.POST.get("user's_speech")
@@ -114,10 +89,8 @@ def calculate_similarity(text1, text2):
     tokens1 = preprocess_text(text1)
     tokens2 = preprocess_text(text2)
 
-    # Calculate the intersection of tokens
     intersection = set(tokens1) & set(tokens2)
 
-    # Calculate the percentage of similarity
     similarity_percentage = (len(intersection) / len(tokens1)) * 100
 
     return similarity_percentage
