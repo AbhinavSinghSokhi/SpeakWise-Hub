@@ -1,0 +1,9 @@
+scalar GraphQLDate
+#### Top Level Declarations
+type Query {
+  about: String!
+}
+
+type Mutation {
+  setAboutMessage(message: String!): String
+}
