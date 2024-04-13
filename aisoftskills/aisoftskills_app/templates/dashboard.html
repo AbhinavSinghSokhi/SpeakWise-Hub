@@ -99,6 +99,8 @@ if(SpeechRecogniser){
     btn?.addEventListener("click",(ev)=>{
         btn.disabled = true;
         audioListener.start();
+        console.log("audio started");
+
         audioListener.addEventListener("audiostart",()=>{
             console.log("audio started");
         });

@@ -2,8 +2,20 @@ scalar GraphQLDate
 #### Top Level Declarations
 type Query {
   about: String!
+  getQuestions(article: ArticleInputs) : Answer
 }
-
+type Article {
+  heading: String
+  content: String
+}
+type Answer {
+  question: String
+  answer: String
+}
+input ArticleInputs {
+  heading: String
+  content: String
+}
 type Mutation {
   setAboutMessage(message: String!): String
 }

@@ -11,7 +11,7 @@ installHandler(app);
   try {
     await connectToDb();
     app.listen(port, () => {
-      console.log('DineFresh API v1.0.0 started on port', port);
+      console.log('Questions API v1.0.0 started on port', port);
     });
   } catch (err) {
     console.log('ERROR:', err);

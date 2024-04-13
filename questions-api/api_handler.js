@@ -4,9 +4,11 @@ const { ApolloServer } = require("apollo-server-express");
 
 const GraphQLDate = require("./graphql_date.js");
 const about = require("./about.js");
+const questions = require("./questions.js");
 const resolvers = {
   Query: {
     about: about.getMessage,
+    getQuestions: questions.get
   },
   Mutation: {
     setAboutMessage: about.setMessage,
