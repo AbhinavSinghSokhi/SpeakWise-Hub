@@ -19,16 +19,16 @@ First Clone this folder in the project:
 
 \[Fully read this before acting upon it\]
 
-First you will need an OpenAI API KEY. To get this, create and OpenAI Account or login from an existing Login Provider and Open the dashboard. Navigate to API Keys, and click on Create New Secret Key. This generates a secret key which is available to copy ONLY ONCE so make sure to copy it.  
+First you will need an OpenAI API KEY. To get this, create and OpenAI Account or login from an existing Login Provider and Open the dashboard. Navigate to API Keys, and click on Create New Secret Key. This generates a secret key which is available to copy ONLY ONCE so make sure to copy it.
 
-Next create an environment variable file(`.env`) and put your OpenAI Secret Key in there like so:  
+Next create an environment variable file(`.env`) and put your OpenAI Secret Key in there like so:
  - OPEN_API_KEY=yourexampleapikey
  - additionally ou must define the DB Url and API Port in the .env file like so:
    - DB_URL=your_db_url
    - API_SERVER_PORT=3001
 Now You can start using the APIs provided by Speakwise Hub!
 
-\*\*Please note that all of these functions are limited to the number of requests allowed per minute as set by OpenAI and has an upper limit of $5 per month which is roughly equal to 1 Million Token(IN and OUT both).  
+\*\*Please note that all of these functions are limited to the number of requests allowed per minute as set by OpenAI and has an upper limit of $5 per month which is roughly equal to 1 Million Token(IN and OUT both).
 
 Note that all responses are given as JSON Objects, with status code being the HTTP Status Code of the response. If any error occurs while processing it will give an 500 Internal Server Error.
 
@@ -38,7 +38,7 @@ Curl Request:
 
 curl --location 'http://localhost:3001/graphql' \\
 --header 'Content-Type: application/json' \\
---data '{"query":"query ($article: ArticleInputs) {\n getQuestions(\n article: $article\n ) {\n question\n answer\n }\n}","variables":{"article":{"heading":"This is an example Heading for the news Article", "content": "Hello, this is an example article, we hope you are in the best of your health and are enjoying this beautiful day/night."}}}'  
+--data '{"query":"query ($article: ArticleInputs) {\n getQuestions(\n article: $article\n ) {\n question\n answer\n }\n}","variables":{"article":{"heading":"This is an example Heading for the news Article", "content": "Hello, this is an example article, we hope you are in the best of your health and are enjoying this beautiful day/night."}}}'
 
 Do replace the variable article: {heading, content} to your actual article object.
 

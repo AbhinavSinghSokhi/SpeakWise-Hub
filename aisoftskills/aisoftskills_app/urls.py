@@ -11,8 +11,8 @@ urlpatterns = [
     path('login_form', views.login_form, name="login_form"),
     path('dashboard', views.dashboard_page, name="dashboard"),
     path('logout_user', views.logout_user, name="logout_user"),
-    # path('newspage', views.newspage, name="newspage"),
-    # path('server-side-fetch', views.fetchnews, name="fetchnews"),
-    # path('news',views.news, name="news"),
     path("user_speech", views.user_speech, name='user_speech'),
+    path("contact_us", views.contact_us, name="contact_us"),
+    path("about_us", views.about_us, name="about-us"),
 ]
+
