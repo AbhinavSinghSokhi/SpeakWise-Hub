@@ -44,5 +44,6 @@ Curl Request:
 
 Do replace the variable article: {heading, content} to your actual article object.
 
-This API returns a GraphQL JSON Object as data in the form: {getQuestions: {"question": "Returned Question", "answer": "Returned Answer" }}
+This API returns a GraphQL JSON Object as data in the form: {getQuestions: {"question": "Returned Question", "answer": "Returned Answer" }}  \
+
 Have fun coding!
