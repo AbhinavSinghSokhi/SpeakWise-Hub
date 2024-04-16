@@ -35,18 +35,9 @@ Note that all responses are given as JSON Objects, with status code being the HT
 ### Calling API Using cURL
 
 Curl Request:
-
-<<<<<<< HEAD
 ``curl --location 'http://localhost:3001/graphql' \``
-
 ``--header 'Content-Type: application/json' \``
-
 ``--data '{"query":"query ($article: ArticleInputs) {\n getQuestions(\n article: $article\n ) {\n question\n answer\n }\n}","variables":{"article":{"heading":"This is an example Heading for the news Article", "content": "Hello, this is an example article, we hope you are in the best of your health and are enjoying this beautiful day/night."}}}'``
-=======
-curl --location 'http://localhost:3001/graphql' \\
---header 'Content-Type: application/json' \\
---data '{"query":"query ($article: ArticleInputs) {\n getQuestions(\n article: $article\n ) {\n question\n answer\n }\n}","variables":{"article":{"heading":"This is an example Heading for the news Article", "content": "Hello, this is an example article, we hope you are in the best of your health and are enjoying this beautiful day/night."}}}'
->>>>>>> 080e46c47ffb2b4f9a9c6d7c5ecceb4e6070d459
 
 Do replace the variable article: {heading, content} to your actual article object.
 
